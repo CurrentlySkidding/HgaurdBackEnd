@@ -1,1 +1,20 @@
 
+services:
+  - type: web
+    name: auth-backend
+    runtime: node
+    repo: https://github.com/yourusername/your-repo
+    plan: free
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: auth-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+    buildCommand: npm install
+    startCommand: npm start
+
+databases:
+  - name: auth-db
+    plan: free
